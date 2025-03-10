@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Secreto 🎁</title>
+    <style>
+        /* Estilo geral da página */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #6a0dad; /* Fundo roxo */
+            color: white;
+            padding: 20px;
+        }
+
+        /* Container principal */
+        #container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: auto;
+            color: black;
+        }
+
+        /* Imagem representativa */
+        #imagem {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Campos de entrada e botões */
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        input {
+            width: 80%;
+            font-size: 16px;
+        }
+
+        button {
+            background: #ffcc00;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff9900;
+        }
+
+        /* Lista de amigos */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #ffcc00;
+            color: black;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        /* Resultado */
+        #resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            background: #28a745;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <img id="imagem" src="https://source.unsplash.com/300x300/?woman,gift" alt="Mulher segurando um presente">
+        <h2>Amigo Secreto 🎁</h2>
+        <input type="text" id="nomeAmigo" placeholder="Digite o nome do amigo">
+        <button onclick="adicionarAmigo()">Adicionar</button>
+        <ul id="listaAmigos"></ul>
+        <button onclick="sortearAmigo()">Sortear Amigo Secreto</button>
+        <h3 id="resultado"></h3>
+    </div>
+
+    <script>
+        let amigos = []; // Array para armazenar os amigos
+
+        function adicionarAmigo() {
+            let input = document.getElementById("nomeAmigo");
+            let nome = input.value.trim();
+
+            if (nome === "") {
+                alert("Por favor, insira um nome.");
+                return;
+            }
+
+            amigos.push(nome); // Adiciona o nome ao array
+            input.value = ""; // Limpa o campo de entrada
+            atualizarLista(); // Atualiza a lista exibida
+        }
+
+        function atualizarLista() {
+            let lista = document.getElementById("listaAmigos");
+            lista.innerHTML = ""; // Limpa a lista antes de adicionar novos itens
+
+            amigos.forEach(nome => {
+                let li = document.createElement("li");
+                li.textContent = nome;
+                lista.appendChild(li);
+            });
+        }
+
+        function sortearAmigo() {
+            if (amigos.length === 0) {
+                alert("Adicione pelo menos um amigo antes de sortear!");
+                return;
+            }
+
+            let indiceSorteado = Math.floor(Math.random() * amigos.length);
+            let amigoSorteado = amigos[indiceSorteado];
+
+            document.getElementById("resultado").innerHTML = `🎉 O amigo sorteado é: <strong>${amigoSorteado}</strong>!`;
+        }
+    </script>
+
+</body>
+</html>
